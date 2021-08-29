@@ -32,18 +32,18 @@ def get_args():
     return args
 
 
-def run(opts):
+def run(checkpoint_path, vocab_file, input_files):
   # Build the inference graph.
   g = tf.Graph()
   with g.as_default():
     model = inference_wrapper.InferenceWrapper()
-    restore_fn = model.build_graph_from_config(configuration.ModelConfig(), opts.checkpoint_path)
+    restore_fn = model.build_graph_from_config(configuration.ModelConfig(), checkpoint_path)
   g.finalize()
 
   # Create the vocabulary.
-  vocab = vocabulary.Vocabulary(opts.vocab_file)
+  vocab = vocabulary.Vocabulary(vocab_file)
 
-  filename = opts.input_files
+  filename = input_files
 
   with tf.Session(graph=g) as sess:
     # Load the model from checkpoint.
@@ -75,4 +75,4 @@ def run(opts):
 
 if __name__ == "__main__":
   opt = get_args()
-  print(run(opt))
+  print(run(opt.checkpoint_path, opt.vocab_file, opt.input_files))

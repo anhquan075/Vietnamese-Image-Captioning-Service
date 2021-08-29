@@ -1,0 +1,10 @@
+SERVICE:
+    SERVICE_IP: "0.0.0.0"
+    SERVICE_PORT: 5000
+    LOG_PATH: "logfile"
+    # Model
+    CHECKPOINT_PATH: "models/model.ckpt-200000"
+
+    # Word counts file
+
+    VOCAB_FILE: "data/word_counts_4000vntk.txt"
